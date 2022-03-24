@@ -1,0 +1,22 @@
+title: app_error
+type: object
+examples:
+  - message: string
+    name: invalid_input
+    is_operational: true
+description: Represents an error of the application
+properties:
+  message:
+    type: string
+    minLength: 3
+  name:
+    type: string
+    enum:
+      - invalid_input
+      - unauthorized
+      - operation_not_allowed
+      - not_found
+      - unknow
+  is_operational:
+    type: boolean
+    default: true

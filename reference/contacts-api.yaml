@@ -1,0 +1,215 @@
+openapi: 3.1.0
+info:
+  title: contacts-api
+  version: '1.0'
+  summary: 'Allows to get, update or create contacts'
+  description: 'Allows to get, update or create contacts'
+  license:
+    identifier: '1'
+    name: MIT
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /contacts:
+    get:
+      summary: get-contacts
+      tags:
+        - contacts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/contact_response.yaml
+      operationId: get-contacts
+      description: Get all contacts
+    post:
+      summary: create-contact
+      tags:
+        - contacts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../models/contact_response.yaml
+              examples:
+                example-1:
+                  value:
+                    _id: 1f704bc5-5055-43eb-a851-c87b6b0bf7b9
+                    index: 0
+                    birth_date: '2019-08-24'
+                    first_name: string
+                    last_name: string
+                    username: string
+                    company: string
+                    email: user@example.com
+                    phone: string
+                    address:
+                      street: string
+                      city: string
+                      state: string
+                    job_position: string
+                    roles:
+                      - {}
+                    active: true
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../models/app_error.yaml
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    message: string
+                    name: invalid_input
+                    status: 0
+                    is_operational: true
+      operationId: post-contacts
+      description: Allows to create a new contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/contact_request.yaml
+            examples:
+              example-1:
+                value:
+                  _id: 1f704bc5-5055-43eb-a851-c87b6b0bf7b9
+                  index: 0
+                  birth_date: '2019-08-24'
+                  first_name: string
+                  last_name: string
+                  username: string
+                  company: string
+                  email: user@example.com
+                  phone: string
+                  address:
+                    street: string
+                    city: string
+                    state: string
+                  job_position: string
+                  roles:
+                    - {}
+                  active: true
+              example-2:
+                value:
+                  _id: 1f704bc5-5055-43eb-a851-c87b6b0bf7b9
+                  index: 0
+                  birth_date: '2019-08-24'
+                  first_name: string
+                  last_name: string
+                  username: string
+                  company: string
+                  email: user@example.com
+                  phone: string
+                  address:
+                    street: string
+                    city: string
+                    state: string
+                  job_position: string
+                  roles:
+                    - {}
+                  active: true
+        description: ''
+  '/contacts/{index}':
+    get:
+      summary: get-contact-by-index
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/contact_response.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../models/app_error.yaml
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    message: string
+                    name: invalid_input
+                    status: 0
+                    is_operational: true
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../models/app_error.yaml
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    message: Contact not found
+                    name: not_found
+                    status: 0
+                    is_operational: true
+      operationId: get-contacts-by-index
+      description: Get a contact by its index number
+    put:
+      summary: update-contact
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/contact_response.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../models/app_error.yaml
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    message: string
+                    name: invalid_input
+                    status: 0
+                    is_operational: true
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../models/app_error.yaml
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    message: string
+                    name: not_found
+                    status: 0
+                    is_operational: true
+      operationId: 'put-contacts-:index'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/contact_request.yaml
+      description: Allows to update a contact
+    parameters:
+      - schema:
+          type: number
+        name: index
+        in: path
+        required: true
+        description: index number of the conatct
+components:
+  schemas: {}

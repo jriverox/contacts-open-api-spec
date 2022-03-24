@@ -1,0 +1,101 @@
+description: Contact response
+type: object
+x-examples:
+  example-1:
+    _id: 6224df1fecd9bb24050cf326
+    index: 1
+    birth_date: '1994-01-01'
+    first_name: Mcconnell
+    last_name: Pope
+    username: mcconnell.pope
+    company: Skybold
+    email: mcconnell.pope@skybold.com
+    phone: +1 432 106 4631
+    address:
+      street: 92 Roosevelt Place
+      city: Cuylerville
+      state: Indiana
+    job_position: Executive
+    roles:
+      - guest
+      - member
+    active: true
+examples:
+  - _id: 1f704bc5-5055-43eb-a851-c87b6b0bf7b9
+    index: 0
+    birth_date: '2019-08-24'
+    first_name: string
+    last_name: string
+    username: string
+    company: string
+    email: user@example.com
+    phone: string
+    address:
+      street: string
+      city: string
+      state: string
+    job_position: string
+    roles:
+      - {}
+    active: true
+properties:
+  birth_date:
+    type: string
+    minLength: 1
+    format: date
+  first_name:
+    type: string
+    minLength: 3
+  last_name:
+    type: string
+    minLength: 3
+  username:
+    type: string
+    minLength: 1
+  company:
+    type: string
+    minLength: 1
+  email:
+    type: string
+    minLength: 5
+    format: email
+  phone:
+    type: string
+    minLength: 1
+  address:
+    type: object
+    required:
+      - street
+      - city
+      - state
+    properties:
+      street:
+        type: string
+        minLength: 1
+      city:
+        type: string
+        minLength: 1
+      state:
+        type: string
+        minLength: 1
+  job_position:
+    type: string
+    minLength: 1
+  roles:
+    type: array
+    uniqueItems: true
+    minItems: 0
+    items:
+      type: object
+  active:
+    type: boolean
+    default: true
+required:
+  - birth_date
+  - first_name
+  - last_name
+  - username
+  - company
+  - email
+  - address
+  - active
